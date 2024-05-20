@@ -2,19 +2,28 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoriasRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategoriasRepository::class)]
+#[ORM\Entity]
 class Categorias
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private ?int $categorias_id = null;
 
-    public function getId(): ?int
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $nombre = null;
+
+    #[ORM\OneToMany(mappedBy: 'categoria', targetEntity: Productos::class)]
+    private Collection $productos;
+
+    public function __construct()
     {
-        return $this->id;
+        $this->productos = new ArrayCollection();
     }
+
+    // Getters y Setters
 }
