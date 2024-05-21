@@ -31,6 +31,10 @@ import { HomeComponent } from './components/home/home.component';
 import { FiltrosComponent } from './components/home/components/filtros/filtros.component';
 import { ProductComponent } from './components/home/components/product/product.component';
 import { ProductHeaderComponent } from './components/home/components/product-header/product-header.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CartComponent } from './cart/cart.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -43,6 +47,10 @@ import { ProductHeaderComponent } from './components/home/components/product-hea
     FiltrosComponent,
     ProductComponent,
     ProductHeaderComponent,
+    ProductListComponent,
+    ProductDetailComponent,
+    CartComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
