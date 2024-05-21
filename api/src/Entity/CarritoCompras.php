@@ -30,4 +30,63 @@ class CarritoCompras
     }
 
     // Getters y Setters
+
+    public function getCarritoId(): ?int
+    {
+        return $this->carrito_id;
+    }
+
+    public function getUsuario(): ?Usuarios
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuarios $usuario): self
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    public function getTotal(): ?float
+    {
+        return $this->total;
+    }
+
+    public function setTotal(float $total): self
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductosCarrito[]
+     */
+    public function getProductosCarrito(): Collection
+    {
+        return $this->productosCarrito;
+    }
+
+    public function addProductoCarrito(ProductosCarrito $productoCarrito): self
+    {
+        if (!$this->productosCarrito->contains($productoCarrito)) {
+            $this->productosCarrito[] = $productoCarrito;
+            $productoCarrito->setCarrito($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductoCarrito(ProductosCarrito $productoCarrito): self
+    {
+        if ($this->productosCarrito->removeElement($productoCarrito)) {
+            // set the owning side to null (unless already changed)
+            if ($productoCarrito->getCarrito() === $this) {
+                $productoCarrito->setCarrito(null);
+            }
+        }
+
+        return $this;
+    }
 }

@@ -178,5 +178,4 @@ class Usuarios
 
         return $this;
     }
-
 }

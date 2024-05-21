@@ -24,4 +24,45 @@ class ProductosCarrito
     private ?int $cantidad = null;
 
     // Getters y Setters
+
+    public function getProductosCarritoId(): ?int
+    {
+        return $this->productos_carrito_id;
+    }
+
+    public function getCarrito(): ?CarritoCompras
+    {
+        return $this->carrito;
+    }
+
+    public function setCarrito(?CarritoCompras $carrito): self
+    {
+        $this->carrito = $carrito;
+
+        return $this;
+    }
+
+    public function getProducto(): ?Productos
+    {
+        return $this->producto;
+    }
+
+    public function setProducto(?Productos $producto): self
+    {
+        $this->producto = $producto;
+
+        return $this;
+    }
+
+    public function getCantidad(): ?int
+    {
+        return $this->cantidad;
+    }
+
+    public function setCantidad(int $cantidad): self
+    {
+        $this->cantidad = $cantidad;
+
+        return $this;
+    }
 }
