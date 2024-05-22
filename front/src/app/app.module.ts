@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AuthInterceptor } from './interceptor/auth.interceptor';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './pages/home/home.component';
 
-//  Imports de Angular Material
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
@@ -22,42 +19,29 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-// ---------------------------
 
+import { ProductsHeaderComponent } from './pages/home/components/products-header/products-header.component';
+import { ProductBoxComponent } from './pages/home/components/product-box/product-box.component';
+import { FiltersComponent } from './pages/home/components/filters/filters.component';
 import { HeaderComponent } from './components/header/header.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { HomeComponent } from './components/home/home.component';
-import { FiltrosComponent } from './components/home/components/filtros/filtros.component';
-import { ProductComponent } from './components/home/components/product/product.component';
-import { ProductHeaderComponent } from './components/home/components/product-header/product-header.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { CartComponent } from './cart/cart.component';
-import { FooterComponent } from './footer/footer.component';
-
+import { CartComponent } from './pages/cart/cart.component';
+import { CartService } from './services/cart.service';
+import { HttpClientModule } from '@angular/common/http';
+import { StoreService } from './services/store.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     HomeComponent,
+    ProductsHeaderComponent,
+    ProductBoxComponent,
+    FiltersComponent,
     HeaderComponent,
-    FiltrosComponent,
-    ProductComponent,
-    ProductHeaderComponent,
-    ProductListComponent,
-    ProductDetailComponent,
     CartComponent,
-    FooterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
     MatSidenavModule,
     MatGridListModule,
     MatMenuModule,
@@ -71,15 +55,10 @@ import { FooterComponent } from './footer/footer.component';
     MatTableModule,
     MatBadgeModule,
     MatSnackBarModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
-    provideAnimationsAsync(),
-  ],
+  providers: [CartService, StoreService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
