@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity]
 class Direcciones
@@ -13,8 +14,8 @@ class Direcciones
     private ?int $direcciones_id = null;
 
     #[ORM\ManyToOne(targetEntity: Usuarios::class, inversedBy: 'direcciones')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Usuarios $usuario = null;
+    #[ORM\JoinColumn(name: "usuario_id", referencedColumnName: "usuario_id", nullable: false)]
+    private ?Usuarios $usuario_id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $calle = null;
@@ -33,6 +34,7 @@ class Direcciones
 
     // Getters y Setters
 
+    #[SerializedName("direcciones_id")]
     public function getDireccionesId(): ?int
     {
         return $this->direcciones_id;
@@ -40,12 +42,12 @@ class Direcciones
 
     public function getUsuario(): ?Usuarios
     {
-        return $this->usuario;
+        return $this->usuario_id;
     }
 
-    public function setUsuario(?Usuarios $usuario): self
+    public function setUsuario(?Usuarios $usuario_id): self
     {
-        $this->usuario = $usuario;
+        $this->usuario_id = $usuario_id;
 
         return $this;
     }

@@ -6,6 +6,7 @@ use App\Repository\UsuariosRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: UsuariosRepository::class)]
 class Usuarios
@@ -33,9 +34,6 @@ class Usuarios
     #[ORM\OneToMany(mappedBy: 'usuario', targetEntity: Ordenes::class)]
     private Collection $ordenes;
 
-    #[ORM\OneToOne(mappedBy: 'usuario', targetEntity: CarritoCompras::class, cascade: ['persist', 'remove'])]
-    private ?CarritoCompras $carritoCompras = null;
-
     public function __construct()
     {
         $this->direcciones = new ArrayCollection();
@@ -44,6 +42,7 @@ class Usuarios
 
     // Getters and Setters
   
+    #[SerializedName("usuario_id")]
     public function getUsuarioId(): ?int
     {
         return $this->usuario_id;
@@ -157,25 +156,4 @@ class Usuarios
         return $this;
     }
 
-    public function getCarritoCompras(): ?CarritoCompras
-    {
-        return $this->carritoCompras;
-    }
-
-    public function setCarritoCompras(?CarritoCompras $carritoCompras): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($carritoCompras === null && $this->carritoCompras !== null) {
-            $this->carritoCompras->setUsuario(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($carritoCompras !== null && $carritoCompras->getUsuario() !== $this) {
-            $carritoCompras->setUsuario($this);
-        }
-
-        $this->carritoCompras = $carritoCompras;
-
-        return $this;
-    }
 }

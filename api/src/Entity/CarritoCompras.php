@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity]
 class CarritoCompras
@@ -14,9 +15,9 @@ class CarritoCompras
     #[ORM\Column(type: 'integer')]
     private ?int $carrito_id = null;
 
-    #[ORM\OneToOne(inversedBy: 'carritoCompras', targetEntity: Usuarios::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Usuarios $usuario = null;
+    #[ORM\OneToOne(targetEntity: Usuarios::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(name: "usuario_id", referencedColumnName: "usuario_id")]
+    private ?Usuarios $usuario_id = null;
 
     #[ORM\Column(type: 'float')]
     private ?float $total = null;
@@ -31,6 +32,7 @@ class CarritoCompras
 
     // Getters y Setters
 
+    #[SerializedName("carrito_id")]
     public function getCarritoId(): ?int
     {
         return $this->carrito_id;
@@ -38,12 +40,12 @@ class CarritoCompras
 
     public function getUsuario(): ?Usuarios
     {
-        return $this->usuario;
+        return $this->usuario_id;
     }
 
-    public function setUsuario(?Usuarios $usuario): self
+    public function setUsuario(?Usuarios $usuario_id): self
     {
-        $this->usuario = $usuario;
+        $this->usuario_id = $usuario_id;
 
         return $this;
     }
