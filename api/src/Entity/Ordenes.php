@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity]
 class Ordenes
@@ -15,8 +16,8 @@ class Ordenes
     private ?int $ordenes_id = null;
 
     #[ORM\ManyToOne(targetEntity: Usuarios::class, inversedBy: 'ordenes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Usuarios $usuario = null;
+    #[ORM\JoinColumn(name: "usuario_id", referencedColumnName: "usuario_id", nullable: false)]
+    private ?Usuarios $usuario_id = null;
 
     #[ORM\Column(type: 'date')]
     private ?\DateTimeInterface $fecha = null;
@@ -30,17 +31,19 @@ class Ordenes
     #[ORM\OneToMany(mappedBy: 'orden', targetEntity: DetallesOrden::class)]
     private Collection $detallesOrden;
 
-    #[ORM\ManyToMany(targetEntity: Productos::class, inversedBy: 'ordenes')]
-    private Collection $productos;
+    // #[ORM\ManyToMany(targetEntity: Productos::class)]
+    // #[ORM\JoinColumn(name: "productos_id", referencedColumnName: "productos_id", nullable: false)]
+    // private Collection $productos_id;
 
     public function __construct()
     {
         $this->detallesOrden = new ArrayCollection();
-        $this->productos = new ArrayCollection();
+        // $this->productos_id = new ArrayCollection();
     }
 
     // Getters y Setters
 
+    #[SerializedName("ordenes_id")]
     public function getOrdenesId(): ?int
     {
         return $this->ordenes_id;
@@ -48,12 +51,12 @@ class Ordenes
 
     public function getUsuario(): ?Usuarios
     {
-        return $this->usuario;
+        return $this->usuario_id;
     }
 
-    public function setUsuario(?Usuarios $usuario): self
+    public function setUsuario(?Usuarios $usuario_id): self
     {
-        $this->usuario = $usuario;
+        $this->usuario_id = $usuario_id;
 
         return $this;
     }
@@ -124,27 +127,27 @@ class Ordenes
         return $this;
     }
 
-    /**
-     * @return Collection|Productos[]
-     */
-    public function getProductos(): Collection
-    {
-        return $this->productos;
-    }
+    // /**
+    //  * @return Collection|Productos[]
+    //  */
+    // public function getProductos(): Collection
+    // {
+    //     return $this->productos_id;
+    // }
 
-    public function addProducto(Productos $producto): self
-    {
-        if (!$this->productos->contains($producto)) {
-            $this->productos[] = $producto;
-        }
+    // public function addProducto(Productos $producto): self
+    // {
+    //     if (!$this->productos->contains($producto)) {
+    //         $this->productos[] = $producto;
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeProducto(Productos $producto): self
-    {
-        $this->productos->removeElement($producto);
+    // public function removeProducto(Productos $producto): self
+    // {
+    //     $this->productos->removeElement($producto);
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

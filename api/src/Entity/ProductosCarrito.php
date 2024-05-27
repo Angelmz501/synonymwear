@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity]
 class ProductosCarrito
@@ -25,6 +26,7 @@ class ProductosCarrito
 
     // Getters y Setters
 
+    #[SerializedName("productos_carrito_id")]
     public function getProductosCarritoId(): ?int
     {
         return $this->productos_carrito_id;

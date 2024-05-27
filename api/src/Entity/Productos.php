@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity]
 class Productos
@@ -38,17 +39,18 @@ class Productos
     #[ORM\OneToMany(mappedBy: 'producto', targetEntity: HistorialInventario::class)]
     private Collection $historialInventario;
 
-    #[ORM\ManyToMany(targetEntity: Ordenes::class, mappedBy: 'productos')]
-    private Collection $ordenes;
+    // #[ORM\ManyToMany(targetEntity: Ordenes::class, mappedBy: 'productos')]
+    // private Collection $ordenes;
 
     public function __construct()
     {
         $this->historialInventario = new ArrayCollection();
-        $this->ordenes = new ArrayCollection();
+        // $this->ordenes = new ArrayCollection();
     }
 
     // Getters y Setters
 
+    #[SerializedName("productos_id")]
     public function getProductosId(): ?int
     {
         return $this->productos_id;
@@ -168,30 +170,30 @@ class Productos
         return $this;
     }
 
-    /**
-     * @return Collection|Ordenes[]
-     */
-    public function getOrdenes(): Collection
-    {
-        return $this->ordenes;
-    }
+    // /**
+    //  * @return Collection|Ordenes[]
+    //  */
+    // public function getOrdenes(): Collection
+    // {
+    //     return $this->ordenes;
+    // }
 
-    public function addOrden(Ordenes $orden): self
-    {
-        if (!$this->ordenes->contains($orden)) {
-            $this->ordenes[] = $orden;
-            $orden->addProducto($this);
-        }
+    // public function addOrden(Ordenes $orden): self
+    // {
+    //     if (!$this->ordenes->contains($orden)) {
+    //         $this->ordenes[] = $orden;
+    //         $orden->addProducto($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeOrden(Ordenes $orden): self
-    {
-        if ($this->ordenes->removeElement($orden)) {
-            $orden->removeProducto($this);
-        }
+    // public function removeOrden(Ordenes $orden): self
+    // {
+    //     if ($this->ordenes->removeElement($orden)) {
+    //         $orden->removeProducto($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }
