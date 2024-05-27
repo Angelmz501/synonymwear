@@ -39,12 +39,13 @@ class CategoriasController extends AbstractController
 
     }
 
-    #[Route('/crm', name: 'get_CRM', methods: ['GET'])]
-    public function index(Request $request): Response
+    #[Route('/categorias', name: 'get_categorias', methods: ['GET'])]
+    public function index(): Response
     {
         $result = $this->categoriasRepository->findAll();
 
         return $this->json($result);
     }
+
 
 }
