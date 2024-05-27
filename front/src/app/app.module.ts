@@ -28,6 +28,10 @@ import { CartComponent } from './pages/cart/cart.component';
 import { CartService } from './services/cart.service';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreService } from './services/store.service';
+import { RegisterComponent } from './pages/register/register.component';
+import { RecoverPassComponent } from './pages/recover-pass/recover-pass.component';
+import { LoginComponent } from './pages/login/login.component';
+import { DetailsComponent } from './pages/details/details.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,10 @@ import { StoreService } from './services/store.service';
     FiltersComponent,
     HeaderComponent,
     CartComponent,
+    RegisterComponent,
+    RecoverPassComponent,
+    LoginComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
