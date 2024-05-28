@@ -32,6 +32,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { RecoverPassComponent } from './pages/recover-pass/recover-pass.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DetailsComponent } from './pages/details/details.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { DetailsComponent } from './pages/details/details.component';
     MatSnackBarModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [CartService, StoreService],
   bootstrap: [AppComponent],
